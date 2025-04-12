@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 # Display Images
-import Image from pillow to open images
+#import Image from pillow to open images
 from PIL import Image
 img = Image.open("./crop.png")
 # display image using streamlit
