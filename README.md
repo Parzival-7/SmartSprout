@@ -13,14 +13,6 @@
 
 Smart Farming Assistant is an innovative solution that uses advanced technology to help farmers improve productivity and make better decisions. The platform features a Smart Crop Recommendation system powered by machine learning to suggest optimal crops based on soil nutrients, climate, and historical data. It also includes a Plant Disease Identification tool using convolutional neural networks (CNNs) to accurately diagnose plant diseases from uploaded images, enabling timely intervention. Additional features such as real-time Weather Forecasts, tailored Fertilizer Recommendations based on soil quality and crop requirements, and a Smart Farming Guide for crop management further enhance its value. With a user-friendly web app, farmers can easily access these insights and tools to improve farming practices.
 
-## Research Paper
-
-> This project is based on the research paper published on IEEE. You can find the paper at the following link:
-
-- [IEEE : Smart Crop Recommendation System with Plant Disease Identification](https://ieeexplore.ieee.org/document/10738975)
-
-- You can view the research paper directly here : [View Paper](https://github.com/ravikant-diwakar/AgriSens/blob/master/IEEE_Paper_Smart_Crop_Recommendation_System_with_Plant_Disease_Identification.pdf)
-
 
 ## Features
 
