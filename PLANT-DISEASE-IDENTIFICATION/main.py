@@ -23,8 +23,8 @@ app_mode = st.sidebar.selectbox("Select Page",["HOME","DISEASE RECOGNITION"])
 #st.image(img)'''
 
 #Main Page
-if(app_mode=="HOME"):
-    st.markdown("<h1 style='text-align: center;'>SMART DISEASE DETECTION", unsafe_allow_html=True)
+#if(app_mode=="HOME"):
+ #   st.markdown("<h1 style='text-align: center;'>SMART DISEASE DETECTION", unsafe_allow_html=True)
     
 #Prediction Page
 elif(app_mode=="DISEASE RECOGNITION"):
