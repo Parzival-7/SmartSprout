@@ -22,7 +22,7 @@ from sklearn.preprocessing import LabelEncoder
 #img = Image.open("crop.png")
 # display image using streamlit
 # width is used to set the width of an image
-st.image(img)
+#st.image(img)
 
 df= pd.read_csv('Crop_recommendation.csv')
 
