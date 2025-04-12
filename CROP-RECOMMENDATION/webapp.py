@@ -27,7 +27,7 @@ st.image(img)
 df= pd.read_csv('Crop_recommendation.csv')
 
 #features = df[['temperature', 'humidity', 'ph', 'rainfall']]
-X = df[['N', 'P','K','temperature', 'humidity', 'ph', 'rainfall']]
+X = df[['N','P','K','temperature', 'humidity', 'ph', 'rainfall']]
 y = df['label']
 labels = df['label']
 
@@ -73,7 +73,7 @@ def main():
     # # Setting the title of the web app
     st.markdown("<h1 style='text-align: center;'>SMART CROP RECOMMENDATIONS", unsafe_allow_html=True)
     
-    st.sidebar.title("AgriSens")
+    st.sidebar.title("Smart Sprout")
     # # Input fields for the user to enter the environmental factors
     st.sidebar.header("Enter Crop Details")
     nitrogen = st.sidebar.number_input("Nitrogen", min_value=0.0, max_value=140.0, value=0.0, step=0.1)
@@ -98,4 +98,3 @@ def main():
 ## Running the main function
 if __name__ == '__main__':
     main()
-
