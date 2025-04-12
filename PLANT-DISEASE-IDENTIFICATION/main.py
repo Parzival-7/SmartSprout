@@ -27,7 +27,7 @@ app_mode = st.sidebar.selectbox("Select Page",["DISEASE RECOGNITION"])
  #   st.markdown("<h1 style='text-align: center;'>SMART DISEASE DETECTION", unsafe_allow_html=True)
     
 #Prediction Page
-elif(app_mode=="DISEASE RECOGNITION"):
+if(app_mode=="DISEASE RECOGNITION"):
     st.header("DISEASE RECOGNITION")
     test_image = st.file_uploader("Choose an Image:")
     if(st.button("Show Image")):
