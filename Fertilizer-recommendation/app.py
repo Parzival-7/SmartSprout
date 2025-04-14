@@ -1,29 +1,57 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 # Load dataset
-try:
-    df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
-except FileNotFoundError:
-    st.error("CSV file not found. Please check the path and filename.")
-    st.stop()
+df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 
-# Check for required columns
-required_columns = ['Crop Type', 'Fertilizer Name']
-if not all(col in df.columns for col in required_columns):
-    st.error("CSV file must contain 'Crop Type' and 'Fertilizer Name' columns.")
-    st.stop()
+# Encode categorical features
+label_encoders = {}
+categorical_cols = ['Soil Type', 'Crop Type', 'Fertilizer Name']
+for col in categorical_cols:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(df[col])
+    label_encoders[col] = le
 
-# App title
-st.title("🌱 Fertilizer Recommendation System")
+# Features and target
+X = df.drop('Fertilizer Name', axis=1)
+y = df['Fertilizer Name']
 
-# Crop selection
-crops = df['Crop Type'].unique()
-selected_crop = st.selectbox("Select a Crop", sorted(crops))
+# Train/test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Show fertilizers for selected crop
-if selected_crop:
-    st.subheader(f"Recommended Fertilizers for {selected_crop}")
-    fertilizers = df[df['Crop Type'] == selected_crop]['Fertilizer Name'].unique()
-    for fert in fertilizers:
-        st.write(f"• {fert}")
+# Train model
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Streamlit App UI
+st.title("🌾 Crop Fertilizer Recommendation System")
+
+temp = st.number_input("🌡️ Temperature (°C)", min_value=0, max_value=100, value=25)
+humidity = st.number_input("💧 Humidity (%)", min_value=0, max_value=100, value=50)
+nitrogen = st.number_input("🧪 Nitrogen (ppm)", min_value=0, max_value=500, value=100)
+potassium = st.number_input("🧪 Potassium (ppm)", min_value=0, max_value=500, value=100)
+phosphorous = st.number_input("🧪 Phosphorous (ppm)", min_value=0, max_value=500, value=100)
+
+soil_type = st.selectbox("🪨 Select Soil Type", label_encoders['Soil Type'].classes_)
+crop_type = st.selectbox("🌱 Select Crop Type", label_encoders['Crop Type'].classes_)
+
+# Predict button
+if st.button("Predict Fertilizer"):
+    input_data = pd.DataFrame([[
+        temp,
+        humidity,
+        nitrogen,
+        phosphorous,
+        potassium,
+        label_encoders['Soil Type'].transform([soil_type])[0],
+        label_encoders['Crop Type'].transform([crop_type])[0]
+    ]], columns=X.columns)
+
+    pred = model.predict(input_data)
+    fertilizer = label_encoders['Fertilizer Name'].inverse_transform(pred)[0]
+    st.success(f"🧾 Recommended Fertilizer: **{fertilizer}**")
