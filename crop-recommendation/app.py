@@ -8,7 +8,7 @@ df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 st.title("Fertilizer Recommendation System")
 
 # Crop selection
-df = pd.read_csv("Fertilizer_recommendation.csv")
+df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 crops = df["crop"].unique()
 
 
