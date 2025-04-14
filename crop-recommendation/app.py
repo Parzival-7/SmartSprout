@@ -8,8 +8,9 @@ df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 st.title("Fertilizer Recommendation System")
 
 # Crop selection
-crops = df['Crop'].unique()
-selected_crop = st.selectbox("Select a Crop", sorted(crops))
+df = pd.read_csv("Fertilizer_recommendation.csv")
+crops = df["crop"].unique()
+
 
 # Show available queries for the selected crop
 queries = df[df['Crop'] == selected_crop]['query'].unique()
