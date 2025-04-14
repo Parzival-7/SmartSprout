@@ -36,21 +36,22 @@ humidity = st.number_input("💧 Humidity (%)", min_value=0, max_value=100, valu
 nitrogen = st.number_input("🧪 Nitrogen (ppm)", min_value=0, max_value=500, value=100)
 potassium = st.number_input("🧪 Potassium (ppm)", min_value=0, max_value=500, value=100)
 phosphorous = st.number_input("🧪 Phosphorous (ppm)", min_value=0, max_value=500, value=100)
-
+moisture = st.number_input("💦 Moisture (%)", min_value=0, max_value=100, value=30)
 soil_type = st.selectbox("🪨 Select Soil Type", label_encoders['Soil Type'].classes_)
 crop_type = st.selectbox("🌱 Select Crop Type", label_encoders['Crop Type'].classes_)
 
 # Predict button
 if st.button("Predict Fertilizer"):
     input_data = pd.DataFrame([[
-        temp,
-        humidity,
-        nitrogen,
-        phosphorous,
-        potassium,
-        label_encoders['Soil Type'].transform([soil_type])[0],
-        label_encoders['Crop Type'].transform([crop_type])[0]
-    ]], columns=X.columns)
+    temp,
+    humidity,
+    moisture,
+    label_encoders['Soil Type'].transform([soil_type])[0],
+    label_encoders['Crop Type'].transform([crop_type])[0],
+    nitrogen,
+    potassium,
+    phosphorous
+]], columns=X.columns)
 
     pred = model.predict(input_data)
     fertilizer = label_encoders['Fertilizer Name'].inverse_transform(pred)[0]
