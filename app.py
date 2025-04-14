@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the uploaded dataset
-df = pd.read_csv("Fertilizer_recommendation.csv")
+df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 
 # App Title
 st.title("Fertilizer Recommendation System")
