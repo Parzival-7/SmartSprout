@@ -24,7 +24,7 @@ img = Image.open("CROP-RECOMMENDATION/Crop.png")
 # width is used to set the width of an image
 st.image(img)
 
-df= pd.read_csv('Crop_recommendation.csv')
+df= pd.read_csv('CROP-RECOMMENDATION/Crop_recommendation.csv')
 
 #features = df[['temperature', 'humidity', 'ph', 'rainfall']]
 X = df[['N','P','K','temperature', 'humidity', 'ph', 'rainfall']]
