@@ -9,7 +9,7 @@ st.title("Fertilizer Recommendation System")
 
 # Crop selection
 df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
-crops = df["crop"].unique()
+crops = df["Crop Type"].unique()
 
 
 # Show available queries for the selected crop
