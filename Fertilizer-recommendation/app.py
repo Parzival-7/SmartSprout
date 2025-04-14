@@ -13,7 +13,7 @@ crops = df["Crop Type"].unique()
 
 
 # Show available queries for the selected crop
-queries = df[df['Crop Type'] == selected_crop]['query'].unique()
+queries = df[df['Crop Type'] == selected_crop]['Fertilizer Name'].unique()
 selected_query = st.selectbox("Select a Query", sorted(queries))
 
 # Get recommendation
