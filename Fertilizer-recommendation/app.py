@@ -1,34 +1,29 @@
 import streamlit as st
 import pandas as pd
 
-# Load dataset safely
+# Load dataset
 try:
     df = pd.read_csv("Datasets/Fertilizer_recommendation.csv")
 except FileNotFoundError:
-    st.error("Dataset file not found. Please check the path.")
+    st.error("CSV file not found. Please check the path and filename.")
     st.stop()
 
-# Required columns check
-required_columns = ['Crop Type', 'Fertilizer Name', 'query', 'KCCAns']
+# Check for required columns
+required_columns = ['Crop Type', 'Fertilizer Name']
 if not all(col in df.columns for col in required_columns):
-    st.error("CSV file is missing required columns: 'Crop Type', 'Fertilizer Name', 'query', or 'KCCAns'")
+    st.error("CSV file must contain 'Crop Type' and 'Fertilizer Name' columns.")
     st.stop()
 
-# App Title
-st.title("Fertilizer Recommendation System")
+# App title
+st.title("🌱 Fertilizer Recommendation System")
 
 # Crop selection
-crops = df["Crop Type"].unique()
-selected_crop = st.selectbox("Select Crop", sorted(crops))
+crops = df['Crop Type'].unique()
+selected_crop = st.selectbox("Select a Crop", sorted(crops))
 
-# Show available queries for the selected crop
-queries = df[df['Crop Type'] == selected_crop]['query'].unique()
-selected_query = st.selectbox("Select a Query", sorted(queries))
-
-# Get recommendation
-if st.button("Get Recommendation"):
-    result = df[(df['Crop Type'] == selected_crop) & (df['query'] == selected_query)]['KCCAns'].values
-    if result:
-        st.success(f"🧪 Recommendation: {result[0]}")
-    else:
-        st.warning("No recommendation found for this combination.")
+# Show fertilizers for selected crop
+if selected_crop:
+    st.subheader(f"Recommended Fertilizers for {selected_crop}")
+    fertilizers = df[df['Crop Type'] == selected_crop]['Fertilizer Name'].unique()
+    for fert in fertilizers:
+        st.write(f"• {fert}")
